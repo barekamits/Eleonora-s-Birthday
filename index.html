@@ -8,7 +8,12 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { margin: 0; overflow: hidden; font-family: 'Playfair Display', serif; }
- 
+     @font-face {
+      font-family: 'Vrdznagir';
+      src: url('Vrdznagir.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
   /* SCREEN 1 */
   .screen1 {
     position: fixed; width: 100%; height: 100vh;
@@ -69,7 +74,7 @@
  
   .greeting {
     text-align: center; color: #f8e7e0;
-    font-family: 'Noto Serif Armenian', serif;
+    font-family: 'Vrdznagir';
     font-size: clamp(15px, 3.8vw, 19px);
     line-height: 1.9; letter-spacing: 0.5px;
     font-weight: 300;
@@ -135,7 +140,7 @@
   
   .note-text {
     text-align: center; color: rgba(248,231,224,0.72);
-    font-family: 'Noto Serif Armenian', serif;
+    font-family: 'Vrdznagir', serif;
     font-size: clamp(13px, 3.2vw, 16px); line-height: 2;
     letter-spacing: 0.4px; font-weight: 300; width: 100%;
   }
@@ -178,6 +183,7 @@
   }
   .dresscode-note {
     font-size: clamp(12px, 3vw, 14px);
+    font-family: 'Vrdznagir';
     color: rgba(248,231,224,0.5);
     font-style: italic;
     letter-spacing: 0.5px;
