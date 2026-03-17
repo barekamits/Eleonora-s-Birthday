@@ -42,14 +42,15 @@
   }
 
   .title {
-    color: #f8e7e0;
-    font-family: 'Great Vibes', cursive;
-    font-size: 48px;
-    margin-bottom: 40px;
-    text-shadow: 0 0 10px rgba(255,255,255,0.2);
-    transform: translateY(150px); 
-  }
-
+.title {
+  color: #f8e7e0;
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(28px, 9vw, 72px); /* ← սա ինքնաբերաբար հարմարվում է */
+  white-space: nowrap; /* ← կանխում է տողի կոտրումը */
+  margin-bottom: 40px;
+  text-shadow: 0 0 10px rgba(255,255,255,0.2);
+  transform: translateY(150px);
+}
   /* BOW */
   .bow {
     cursor: pointer;
