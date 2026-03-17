@@ -4,119 +4,248 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Invitation</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Great+Vibes&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
-  body {
-    margin: 0;
-    overflow: hidden;
-    font-family: 'Playfair Display', serif;
-  }
-
-  /* FIRST SCREEN */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { margin: 0; overflow: hidden; font-family: 'Playfair Display', serif; }
+ 
+  /* SCREEN 1 */
   .screen1 {
-    position: fixed;
-    width: 100%;
-    height: 100vh;
+    position: fixed; width: 100%; height: 100vh;
     background: radial-gradient(circle at center, #7a0f1c 0%, #3b0008 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    transition: 0.8s ease;
-    z-index: 10;
+    display: flex; justify-content: center; align-items: center; flex-direction: column;
+    transition: 0.8s ease; z-index: 10;
   }
-
-  .screen1.hide {
-    opacity: 0;
-    pointer-events: none;
+  .screen1.hide { opacity: 0; pointer-events: none; }
+  .subtitle { color: #f8e7e0; font-size: 20px; margin-bottom: 10px; letter-spacing: 2px; transform: translateY(100px); }
+  .title {
+    color: #f8e7e0; font-family: 'Great Vibes', cursive;
+    font-size: clamp(28px, 9vw, 72px); white-space: nowrap;
+    margin-bottom: 40px; text-shadow: 0 0 10px rgba(255,255,255,0.2); transform: translateY(150px);
   }
-
-  .subtitle {
-    color: #f8e7e0;
-    font-size: 20px;
-    margin-bottom: 10px;
-    letter-spacing: 2px;
-    transform: translateY(100px); 
-  }
-
-.title {
-  color: #f8e7e0;
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(28px, 9vw, 72px); /* ← սա ինքնաբերաբար հարմարվում է */
-  white-space: nowrap; /* ← կանխում է տողի կոտրումը */
-  margin-bottom: 40px;
-  text-shadow: 0 0 10px rgba(255,255,255,0.2);
-  transform: translateY(150px);
-}
-  /* BOW */
-  .bow {
-    cursor: pointer;
-    transition: transform 0.2s ease;
-  }
-
-  .bow img {
-    width: 180px;
-  }
-
-  .bow:active {
-    transform: scale(0.9);
-  }
-
-  /* SECOND SCREEN */
+  .bow { cursor: pointer; transition: transform 0.2s ease; }
+  .bow img { width: 180px; }
+  .bow:active { transform: scale(0.9); }
+ 
+  /* SCREEN 2 */
   .screen2 {
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    background: url('second-bg.png') center/cover no-repeat; /* հետո կփոխես */
-    opacity: 0;
-    transition: 1s ease;
-    z-index: 1;
+    position: fixed; width: 100%; height: 100vh;
+    background: radial-gradient(circle at center, #7a0f1c 0%, #3b0008 100%);
+    opacity: 0; transition: 1s ease; z-index: 1;
+    display: flex; flex-direction: column; align-items: center;
+    overflow-y: auto; overflow-x: hidden;
   }
-
-  .screen2.show {
-    opacity: 1;
+  .screen2.show { opacity: 1; }
+ 
+  /* Stars */
+  .stars { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; }
+  .star {
+    position: absolute; width: 2px; height: 2px; background: #fff; border-radius: 50%;
+    opacity: 0; animation: twinkle var(--d) ease-in-out infinite var(--delay);
   }
-
+  @keyframes twinkle { 0%,100%{opacity:0;} 50%{opacity:var(--op);} }
+ 
+  /* Corner roses */
+  .rose { position: fixed; width: 140px; opacity: 0.4; pointer-events: none; z-index: 1; }
+  .rose-tl { top:-15px; left:-15px; }
+  .rose-tr { top:-15px; right:-15px; transform: rotate(90deg); }
+  .rose-bl { bottom:-15px; left:-15px; transform: rotate(270deg); }
+  .rose-br { bottom:-15px; right:-15px; transform: rotate(180deg); }
+ 
+  /* Content */
+  .content-wrap {
+    position: relative; z-index: 2;
+    width: 100%; max-width: 480px;
+    padding: 50px 28px 70px;
+    display: flex; flex-direction: column; align-items: center; gap: 0;
+  }
+ 
+  .divider {
+    width: 160px; height: 1px;
+    background: linear-gradient(to right, transparent, #c9a96e, transparent);
+    margin: 22px auto;
+  }
+  .divider-sm { width: 70px; margin: 16px auto; }
+ 
+  .greeting {
+    text-align: center; color: #f8e7e0;
+    font-size: clamp(15px, 3.8vw, 19px);
+    line-height: 1.9; letter-spacing: 0.5px;
+    font-style: italic;
+  }
+ 
+  .big-name {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(54px, 15vw, 96px);
+    color: #f8e7e0;
+    text-shadow: 0 0 20px rgba(201,169,110,0.35);
+    line-height: 1; text-align: center;
+  }
+ 
+  .detail-label {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: #c9a96e; text-align: center; margin-bottom: 7px;
+  }
+  .detail-value {
+    font-size: clamp(17px, 4.5vw, 24px);
+    color: #f8e7e0; letter-spacing: 1px; text-align: center;
+  }
+  .detail-sub {
+    font-size: clamp(12px, 2.8vw, 14px);
+    color: rgba(248,231,224,0.5); letter-spacing: 1px;
+    text-align: center; margin-top: 4px;
+  }
+ 
+  .map-link {
+    display: inline-block; margin-top: 12px;
+    font-size: clamp(12px, 2.8vw, 14px);
+    color: #c9a96e; letter-spacing: 2px;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(201,169,110,0.35);
+    padding-bottom: 2px; transition: opacity 0.2s;
+  }
+  .map-link:hover { opacity: 0.7; }
+ 
+  .photo-wrap { display: flex; flex-direction: column; align-items: center; width: 100%; }
+  .birthday-photo {
+    width: clamp(180px, 58vw, 280px);
+    height: clamp(180px, 58vw, 280px);
+    border-radius: 50%; object-fit: cover;
+    border: 2px solid rgba(201,169,110,0.5);
+    box-shadow: 0 0 30px rgba(201,169,110,0.12);
+    display: block;
+   
+    
+  }
+  .photo-placeholder {
+    width: clamp(180px, 58vw, 280px);
+    height: clamp(180px, 58vw, 280px);
+    border-radius: 50%;
+    border: 2px solid rgba(201,169,110,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Great Vibes', cursive; font-size: 40px;
+    color: rgba(201,169,110,0.45); background: rgba(255,255,255,0.02);
+  }
+  
+  .note-text {
+    text-align: center; color: rgba(248,231,224,0.72);
+    font-size: clamp(13px, 3.2vw, 16px); line-height: 2;
+    letter-spacing: 0.4px; font-style: italic; width: 100%;
+  }
+  .note-bold {
+    display: block; margin-top: 12px;
+    color: #f8e7e0; font-style: normal;
+    font-size: clamp(14px, 3.5vw, 17px); letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .dots { color: #c9a96e; font-size: 10px; letter-spacing: 8px; text-align: center; }
 </style>
 </head>
-
 <body>
-
-<!-- FIRST SCREEN -->
+ 
+<!-- SCREEN 1 -->
 <div class="screen1" id="screen1">
-
   <div class="subtitle">You're invited to</div>
-
-  <div class="title">
-    Eleonora's Birthday Party
-  </div>
-
+  <div class="title">Eleonora's Birthday Party</div>
   <div class="bow" id="bow">
-    <img src="https://uploads.onecompiler.io/43gpeysj6/44gm5u644/bant.png">
+    <img src="https://uploads.onecompiler.io/43gpeysj6/44gm5u644/bant.png" alt="bow">
   </div>
-
 </div>
-
-<!-- SECOND SCREEN -->
-<div class="screen2" id="screen2"></div>
-
+ 
+<!-- SCREEN 2 -->
+<div class="screen2" id="screen2">
+ 
+  <div class="stars" id="stars"></div>
+ 
+  <img class="rose rose-tl" src="https://uploads.onecompiler.io/43gpeysj6/44gm5u644/bant.png" alt="">
+  <img class="rose rose-tr" src="https://uploads.onecompiler.io/43gpeysj6/44gm5u644/bant.png" alt="">
+  <img class="rose rose-bl" src="https://uploads.onecompiler.io/43gpeysj6/44gm5u644/bant.png" alt="">
+  <img class="rose rose-br" src="https://uploads.onecompiler.io/43gpeysj6/44gm5u644/bant.png" alt="">
+ 
+  <div class="content-wrap">
+ 
+    <!-- ԲԱԺԻՆ 1 · Ողջույն -->
+    <p class="greeting">
+      Սիրելիներս,<br>
+      սիրով հրավիրում եմ ձեզ<br>
+      նշելու իմ ծննդյան օրը
+    </p>
+ 
+    <div class="divider"></div>
+ 
+    <!-- ԲԱԺԻՆ 2 · Անուն -->
+    <div class="big-name">Eleonora</div>
+ 
+    <div class="divider divider-sm"></div>
+ 
+    <!-- ԲԱԺԻՆ 3 · Ամսաթիվ -->
+    <div style="text-align:center; width:100%;">
+      <div class="detail-label">Ամսաթիվ</div>
+      <div class="detail-value">Մարտի 20, 2025</div>
+      <div class="detail-sub">Հինգշաբթի</div>
+    </div>
+ 
+    <div class="divider divider-sm"></div>
+ 
+    <!-- ԲԱԺԻՆ 4 · Ժամ -->
+    <div style="text-align:center; width:100%;">
+      <div class="detail-label">Ժամը</div>
+      <div class="detail-value">19։00</div>
+    </div>
+ 
+    <div class="divider divider-sm"></div>
+ 
+    <!-- ԲԱԺԻՆ 5 · Վայր + Քարտեզ -->
+    <div style="text-align:center; width:100%;">
+      <div class="detail-label">Վայրը</div>
+      <div class="detail-value">Հոբլյար</div>
+      <div class="detail-sub">Երևան</div>
+      <a class="map-link" href="https://maps.google.com/?q=Hoblyar+Yerevan+Armenia" target="_blank">
+        📍 Բացել քարտեզում
+      </a>
+    </div>
+ 
+    <div class="divider"></div>
+ 
+    <!-- ԲԱԺԻՆ 6 · Հոբելյարի նկար -->
+    <div class="photo-wrap">
+      <!--
+        Նկարն ավելացնելու համար փոխիր ստորև src-ը.
+        <img class="birthday-photo" src="ՔՈ_ՆԿԱՐԻ_URL" alt="Eleonora">
+      -->
+      <div class="photo-placeholder">
+        <img class="birthday-photo" src="https://uploads.onecompiler.io/43gpeysj6/44gm5u644/3rd.png" alt="Eleonora">
+      </div>
+    </div>
+ 
+    <div class="divider"></div>
+ 
+    <!-- ԲԱԺԻՆ 7 · Նշում -->
+    <p class="note-text">
+      Օրը նշելու միջոցն ամենևին վերջերս եմ ունեցել,<br>
+      այդ իսկ պատճառով Ձեզ մի փոքր ուշ եմ հրավիրում։
+      <span class="note-bold">Խնդրում եմ Չուշանալ ✦</span>
+    </p>
+ 
+    <div class="divider divider-sm"></div>
+    <div class="dots">✦ &nbsp; ✦ &nbsp; ✦</div>
+ 
+  </div>
+</div>
+ 
 <script>
-  const bow = document.getElementById('bow');
-  const screen1 = document.getElementById('screen1');
-  const screen2 = document.getElementById('screen2');
-
-  bow.addEventListener('click', () => {
-    // առաջին էկրանը անհետանա
-    screen1.classList.add('hide');
-
-    // հետո նոր կոնտենտը հայտնվի
-    setTimeout(() => {
-      screen2.classList.add('show');
-    }, 400);
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 70; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${2+Math.random()*4}s;--delay:${Math.random()*5}s;--op:${0.2+Math.random()*0.65};`;
+    starsEl.appendChild(s);
+  }
+  document.getElementById('bow').addEventListener('click', () => {
+    document.getElementById('screen1').classList.add('hide');
+    setTimeout(() => document.getElementById('screen2').classList.add('show'), 400);
   });
 </script>
-
 </body>
 </html>
+ 
